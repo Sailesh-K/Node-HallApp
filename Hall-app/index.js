@@ -5,6 +5,7 @@ const port = 3000
 const rooms=[];
 const booking=[];
 
+//Create Rooms
 app.post('/create-room', (req, res) => {
   const room={
     nos:req.query.nos,
@@ -17,6 +18,7 @@ app.post('/create-room', (req, res) => {
   res.json({capacity:room.nos,pricehr:room.price,roomId:room.id,bookingstatus:room.avail});
 });
 
+//Book-Rooms
 app.post('/book-room', (req, res) => {
     const book={
         name:req.query.name,
@@ -32,6 +34,7 @@ app.post('/book-room', (req, res) => {
     res.json(book);
 });
 
+//Get Room Details
 app.get('/room', (req, res) => {
     const roomData=rooms.map(room=>{
         const roomInfo={
@@ -53,6 +56,7 @@ app.get('/room', (req, res) => {
     res.json(roomData);
 });
 
+//Get Customer Details
 app.get('/customer',(req,res)=>{
     const customerData=booking.map(book=>({
         customerName: book.name,
@@ -64,6 +68,7 @@ app.get('/customer',(req,res)=>{
     res.json(customerData);
 });
 
+//Get Customer Booking Details
 app.get('/customer/:customerName/bookings',(req,res)=>{
     const customerName=req.params.customerName;
     const customerBookings=booking.filter(book=>book.name===customerName);
